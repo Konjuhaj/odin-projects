@@ -1,7 +1,19 @@
 const getComputerChoice = () => {
-	const choices = ["rock", "paper", "scissor"];
+	const choices = ["rock", "paper", "scissors"];
 
 	return(choices[Math.floor(Math.random() * 3)])
+}
+
+const incrementScore = (player, text) => {
+	const score = document.querySelector(`#${player}`);
+	score.innerText = Number(score.innerText) + 1;
+
+	const header = document.querySelector('#winner');
+	header.innerText = text;
+	if (Number(score.innerText) > 4) {
+		header.innerText = `${player} has won the game!`;
+
+	}
 }
 
 const playRound = (playerSelection, computerSelection) => {
@@ -11,14 +23,19 @@ const playRound = (playerSelection, computerSelection) => {
 	if (playerSelection === "rock" && computerSelection === "scissors"
 		|| playerSelection === "scissors" && computerSelection === "paper"
 		|| playerSelection === "paper" && computerSelection === "rock" ) {
-			return `You WIN! ${playerSelection} beats ${computerSelection} !`;
+			incrementScore('human', `You WIN! ${playerSelection} beats ${computerSelection} !`);
+			return ;
 	} else {
-		return `You Lose! ${playerSelection} beats ${computerSelection} !`;
+		incrementScore('computer', `You Lose! ${playerSelection} loses to ${computerSelection} !`);
+		return ;
 	}
 }
 
-const game = () => {
-	for (i = 0; i < 5; i++) {
-		console.log(playRound(prompt("What is your choice?\n Rock-Paper-Scissor").toLowerCase(), getComputerChoice()));
-	}
-}
+
+const choices = document.querySelectorAll('.item');
+
+choices.forEach((choice) => {
+	choice.addEventListener('click', () => {
+		playRound(choice.querySelector('h1').innerText.toLowerCase(), getComputerChoice());
+	})
+})
