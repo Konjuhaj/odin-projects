@@ -19,17 +19,8 @@ button {
 .squares {
 	display: grid;
 	grid-template-columns: repeat(12, minmax(10px, 1fr));
-	height: 100%;
-	width: 100%;
-}
-
-.square {
+	height: 400px;
+	width: 400px;
 	border: solid;
-	border-radius: 5px;
-	border-color: black;
-	transition: all 1s ease-out;
 }
 
-.square:hover {
-	background-color: red;
-}
